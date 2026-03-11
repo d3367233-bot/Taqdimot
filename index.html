@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Lug'atlar bilan Ishlash</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 14px;
+            color: #999;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #4a5568;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 20px 0 10px 0;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            position: relative;
+            border-left: 5px solid #667eea;
+        }
+
+        .code-block::before {
+            content: 'Python';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .output {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #2d3748;
+            margin-top: 10px;
+        }
+
+        .output-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #ffeaa7 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .method-card {
+            background: #edf2f7;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+            transition: transform 0.3s;
+        }
+
+        .method-card:hover {
+            transform: translateX(10px);
+            background: #e2e8f0;
+        }
+
+        .method-name {
+            font-family: monospace;
+            font-size: 1.3em;
+            color: #2d3748;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .example-box {
+            background: #fff;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background: #fed7d7;
+            border-left: 5px solid #e53e3e;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+
+        .tip {
+            background: #c6f6d5;
+            border-left: 5px solid #38a169;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin: 15px 0;
+        }
+
+        ul {
+            margin-left: 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .visual-dict {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .dict-item {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: monospace;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #667eea;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .practice-section {
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9edf5 100%);
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .practice-title {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background: #f7fafc;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <div class="slide-number">1 / 8</div>
+            <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                <div style="font-size: 4em; margin-bottom: 20px;">🐍</div>
+                <h1 style="border: none; font-size: 3em;">Python Dasturlash Tili</h1>
+                <div class="subtitle" style="font-size: 1.5em;">Lug'at (Dictionary) Elementlari bilan Ishlash</div>
+                <div style="margin-top: 40px; color: #666;">
+                    <p><strong>Mavzu:</strong> Lug'at metodlari: items(), keys(), values()</p>
+                    <p style="margin-top: 20px; font-size: 0.9em;">📚 15-dars</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <div class="slide-number">2 / 8</div>
+            <h1>📖 Kirish</h1>
+            <div class="content">
+                <h3>Avvalgi darsdan:</h3>
+                <ul>
+                    <li>Lug'at bilan tanishdik</li>
+                    <li>Kalit so'z bo'yicha murojat qilishni o'rgandik</li>
+                    <li>Lug'atlar katta yoki kichik bo'lishi mumkin</li>
+                </ul>
+
+                <div class="warning">
+                    <strong>Muammo:</strong> Ba'zida lug'atdagi barcha kalitlarni yoki qiymatlarni bilmaymiz. Bunday holatda qanday yo'l tutamiz?
+                </div>
+
+                <div class="tip">
+                    <strong>Yechim:</strong> Ushbu darsda lug'at elementlarini turli usullar yordamida chiqarishni o'rganamiz!
+                </div>
+
+                <div class="visual-dict">
+                    <div class="dict-item">'ism': 'Ali'</div>
+                    <div class="dict-item">'yosh': 22</div>
+                    <div class="dict-item">'kurs': 4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: items() Method -->
+        <div class="slide">
+            <div class="slide-number">3 / 8</div>
+            <h1>.items() Metodi</h1>
+            <div class="content">
+                <div class="method-card">
+                    <div class="method-name">dict.items()</div>
+                    <p>Lug'at ichidagi <span class="highlight">barcha kalit-qiymat juftliklarini</span> ko'rish imkonini beradi.</p>
+                </div>
+
+                <div class="two-column">
+                    <div>
+                        <h3>📋 Kod:</h3>
+                        <div class="code-block">talaba_0 = {
+    'ism': 'alijon',
+    'familiya': 'shamshiyev',
+    'yosh': 22,
+    'fakultet': 'matematika',
+    'kurs': 4
+}
+
+print(talaba_0.items())</div>
+                    </div>
+                    <div>
+                        <h3>🎯 Natija:</h3>
+                        <div class="output">
+                            <div class="output-label">Konsol</div>
+dict_items([('ism', 'alijon'), 
+('familiya', 'shamshiyev'), 
+('yosh', 22), 
+('fakultet', 'matematika'), 
+('kurs', 4)])
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 Maslahat:</strong> <code>for</code> tsikli yordamida chaqirish orqali lug'atdagi barcha elementlarni tushunarliroq shaklda ko'rish mumkin.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: items() with for loop -->
+        <div class="slide">
+            <div class="slide-number">4 / 8</div>
+            <h1>.items() + for Tsikli</h1>
+            <div class="content">
+                <h3>Har bir kalit-qiymat juftligini chiroyli chiqarish:</h3>
+                
+                <div class="code-block">for kalit, qiymat in talaba_0.items():
+    print(f"Kalit: {kalit}")
+    print(f"Qiymat: {qiymat} \n")</div>
+
+                <div class="output">
+                    <div class="output-label">Natija</div>
+Kalit: ism<br>
+Qiymat: alijon<br><br>
+Kalit: familiya<br>
+Qiymat: shamshiyev<br><br>
+Kalit: yosh<br>
+Qiymat: 22
+                </div>
+
+                <div class="example-box">
+                    <h3>🍎 Amaliy misol:</h3>
+                    <div class="code-block">telefonlar = {
+    'ali': 'iphone x',
+    'vali': 'galaxy s9',
+    'olim': 'mi 10 pro'
+}
+
+for k, q in telefonlar.items():
+    print(f"{k.title()}ning telefoni {q}")</div>
+                    <div class="output">
+                        <div class="output-label">Natija</div>
+Alining telefoni iphone x<br>
+Valining telefoni galaxy s9<br>
+Olimning telefoni mi 10 pro
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: keys() Method -->
+        <div class="slide">
+            <div class="slide-number">5 / 8</div>
+            <h1>.keys() Metodi</h1>
+            <div class="content">
+                <div class="method-card">
+                    <div class="method-name">dict.keys()</div>
+                    <p>Agar lug'atdagi <span class="highlight">faqat kalit so'zlarni</span> ko'rish talab qilinsa ishlatiladi.</p>
+                </div>
+
+                <div class="two-column">
+                    <div>
+                        <div class="code-block">mahsulotlar = {
+    'olma': 10000,
+    'anor': 20000,
+    'uzum': 40000,
+    'anjir': 25000
+}
+
+print(mahsulotlar.keys())</div>
+                        <div class="output">
+                            <div class="output-label">Natija</div>
+dict_keys(['olma', 'anor', 
+'uzum', 'anjir'])
+                        </div>
+                    </div>
+                    <div>
+                        <div class="code-block">print("Do'kondagi mahsulotlar:")
+for mahsulot in mahsulotlar.keys():
+    print(mahsulot.title())</div>
+                        <div class="output">
+                            <div class="output-label">Natija</div>
+Do'kondagi mahsulotlar:<br>
+Olma<br>
+Anor<br>
+Uzum<br>
+Anjir
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <strong>Eslatma:</strong> <code>for</code> tsiklida <code>.keys()</code> metodini ishlatmasak ham huddi shu natija chiqadi!
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Practical Examples -->
+        <div class="slide">
+            <div class="slide-number">6 / 8</div>
+            <h1>Amaliy Misollar</h1>
+            <div class="content">
+                <h3>🔍 Bo'zorlik ro'yxati bilan solishtirish:</h3>
+                
+                <div class="code-block">bozorlik = ['anor', 'uzum', 'non', 'baliq']
+
+for mahsulot in mahsulotlar:
+    if mahsulot in bozorlik:
+        print(f"{mahsulot.title()} {mahsulotlar[mahsulot]} so'm")</div>
+
+                <div class="output">
+                    <div class="output-label">Natija</div>
+Anor 20000 so'm<br>
+Uzum 40000 so'm
+                </div>
+
+                <div class="arrow">⬇️</div>
+
+                <h3>❌ Yo'q mahsulotlarni topish:</h3>
+                <div class="code-block">for buyum in bozorlik:
+    if buyum not in mahsulotlar:
+        print(f"Iltimos, do'koningizga {buyum} ham olib keling")</div>
+                
+                <div class="output">
+                    <div class="output-label">Natija</div>
+Iltimos, do'koningizga non ham olib keling<br>
+Iltimos, do'koningizga baliq ham olib keling
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: values() and set() -->
+        <div class="slide">
+            <div class="slide-number">7 / 8</div>
+            <h1>.values() va set()</h1>
+            <div class="content">
+                <div class="method-card">
+                    <div class="method-name">dict.values()</div>
+                    <p>Lug'atdagi <span class="highlight">barcha qiymatlarni</span> chiqaradi.</p>
+                </div>
+
+                <div class="two-column">
+                    <div>
+                        <h3>Muammo:</h3>
+                        <div class="code-block">telefonlar = {
+    'ali': 'iphone x',
+    'vali': 'galaxy s9',
+    'hamida': 'galaxy s9',
+    'umar': 'iphone x'
+}
+
+for tel in telefonlar.values():
+    print(tel)</div>
+                        <div class="output" style="border-color: #e53e3e;">
+                            iphone x<br>
+                            galaxy s9<br>
+                            galaxy s9 ← Takrorlanmoqda!<br>
+                            iphone x ← Takrorlanmoqda!
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Yechim (set()):</h3>
+                        <div class="code-block">for tel in set(telefonlar.values()):
+    print(tel)</div>
+                        <div class="output" style="border-color: #38a169;">
+                            iphone x<br>
+                            galaxy s9<br>
+                            <span style="color: #38a169; font-weight: bold;">✓ Takrorlanish yo'q!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>set() haqida:</strong> Set - bu tartibsiz, indekslanmagan va takroriy elementlarsiz ma'lumot turi.
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Summary & Practice -->
+        <div class="slide">
+            <div class="slide-number">8 / 8</div>
+            <h1>📚 Xulosa va Amaliyot</h1>
+            <div class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metod</th>
+                            <th>Vazifasi</th>
+                            <th>Natija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.items()</code></td>
+                            <td>Kalit-qiymat juftliklari</td>
+                            <td>(kalit, qiymat) tuple ro'yxati</td>
+                        </tr>
+                        <tr>
+                            <td><code>.keys()</code></td>
+                            <td>Faqat kalitlar</td>
+                            <td>Kalitlar ro'yxati</td>
+                        </tr>
+                        <tr>
+                            <td><code>.values()</code></td>
+                            <td>Faqat qiymatlar</td>
+                            <td>Qiymatlar ro'yxati</td>
+                        </tr>
+                        <tr>
+                            <td><code>sorted()</code></td>
+                            <td>Alifbo bo'yicha tartiblash</td>
+                            <td>Tartiblangan ro'yxat</td>
+                        </tr>
+                        <tr>
+                            <td><code>set()</code></td>
+                            <td>Takrorlanishlarni olib tashlash</td>
+                            <td>Unikal qiymatlar</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="practice-section">
+                    <div class="practice-title">
+                        <span>📝</span>
+                        <span>Uyga Vazifa</span>
+                    </div>
+                    <ul>
+                        <li><strong>Python lug'ati:</strong> 10 ta so'z qo'shing va <code>for</code> tsikli bilan alifbo ketma-ketligida chiqaring</li>
+                        <li><strong>Davlatlar:</strong> Davlat-poytaxt juftligini tuzing, alohida chiqaring</li>
+                        <li><strong>Restoran menusi:</strong> 3 ta buyurtma berish funksiyasini yarating</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
