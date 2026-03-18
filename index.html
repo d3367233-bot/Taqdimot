@@ -2,144 +2,138 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lug'atlar - Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Lug'atlari - To'liq Qo'llanma</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         /* Header */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1.5rem 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         
         .header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
+            color: #2a5298;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
         
         .header p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-top: 0.3rem;
+            color: #666;
+            font-size: 1.2em;
         }
         
-        /* Navigation Tabs */
-        .nav-tabs {
+        /* Navigation */
+        .nav-menu {
             display: flex;
-            overflow-x: auto;
-            background: #1a1a1a;
-            padding: 0.5rem;
-            gap: 0.5rem;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            position: sticky;
-            top: 80px;
-            z-index: 99;
-            border-bottom: 1px solid #333;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
         }
         
-        .nav-tabs::-webkit-scrollbar {
-            display: none;
-        }
-        
-        .nav-tab {
-            flex-shrink: 0;
-            padding: 0.6rem 1.2rem;
-            background: #2a2a2a;
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.9);
             border: none;
-            color: #aaa;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #2a5298;
             transition: all 0.3s;
-            white-space: nowrap;
         }
         
-        .nav-tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .nav-btn:hover, .nav-btn.active {
+            background: #2a5298;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         /* Content Sections */
-        .content {
+        .content-section {
             display: none;
-            padding: 1rem;
-            animation: fadeIn 0.3s;
+            background: rgba(255,255,255,0.98);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
         
-        .content.active {
+        .content-section.active {
             display: block;
+            animation: fadeIn 0.5s;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Cards */
-        .card {
-            background: #1a1a1a;
-            border-radius: 16px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            border: 1px solid #333;
+        h2 {
+            color: #2a5298;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
         }
         
-        .card-title {
-            color: #667eea;
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin: 30px 0 15px 0;
         }
         
-        .card-text {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.7;
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #444;
         }
         
         /* Code Block */
         .code-block {
-            background: #0d0d0d;
-            border-radius: 12px;
-            margin: 1rem 0;
+            background: #1e1e1e;
+            border-radius: 15px;
             overflow: hidden;
-            border: 1px solid #333;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
         }
         
         .code-header {
-            background: #252525;
-            padding: 0.6rem 1rem;
+            background: #2d2d2d;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 8px;
         }
         
         .dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
         }
         
@@ -147,544 +141,1051 @@
         .dot-yellow { background: #ffbd2e; }
         .dot-green { background: #27c93f; }
         
-        .code-lang {
+        .code-title {
             margin-left: auto;
-            font-size: 0.75rem;
-            color: #666;
-            font-weight: 600;
+            color: #888;
+            font-size: 0.9em;
         }
         
         pre {
-            padding: 1rem;
+            padding: 25px;
             overflow-x: auto;
-            font-family: 'SF Mono', Monaco, monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #e6e6e6;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1em;
+            line-height: 1.7;
+            color: #d4d4d4;
         }
         
-        .keyword { color: #ff79c6; }
-        .string { color: #f1fa8c; }
-        .function { color: #8be9fd; }
-        .comment { color: #6272a4; font-style: italic; }
-        .number { color: #bd93f9; }
+        .keyword { color: #569cd6; font-weight: bold; }
+        .string { color: #ce9178; }
+        .function { color: #dcdcaa; }
+        .method { color: #4ec9b0; }
+        .comment { color: #6a9955; font-style: italic; }
+        .number { color: #b5cea8; }
         
-        /* Output */
-        .output {
-            background: #0d1b0d;
-            border-left: 3px solid #27c93f;
-            padding: 0.8rem 1rem;
-            margin-top: 0.8rem;
-            border-radius: 0 8px 8px 0;
+        /* Output Block */
+        .output-block {
+            background: #f0f9f0;
+            border-left: 5px solid #27c93f;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
             font-family: monospace;
-            font-size: 0.85rem;
-            color: #a8f0a8;
         }
         
-        .output-label {
+        .output-title {
             color: #27c93f;
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9em;
             text-transform: uppercase;
-            margin-bottom: 0.3rem;
-            letter-spacing: 0.5px;
         }
         
-        /* Task Badge */
+        .output-content {
+            color: #2d5a2d;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 25px 0;
+        }
+        
+        .info-title {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 25px 0;
+        }
+        
+        .warning-title {
+            color: #856404;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        /* Tip Box */
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 5px solid #17a2b8;
+            padding: 25px;
+            border-radius: 0 15px 15px 0;
+            margin: 25px 0;
+        }
+        
+        .tip-title {
+            color: #0c5460;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        /* List Styles */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .list-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .list-content {
+            flex: 1;
+        }
+        
+        .list-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .list-desc {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1em;
+        }
+        
+        .comparison-table th {
+            background: #2a5298;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table tr:hover {
+            background: #e9ecef;
+        }
+        
+        /* Task Section */
+        .task-box {
+            background: linear-gradient(135deg, #f093fb20 0%, #f5576c20 100%);
+            border: 3px solid #f5576c;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
         .task-badge {
-            display: inline-block;
+            position: absolute;
+            top: -15px;
+            left: 30px;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
         }
         
-        /* Tip */
-        .tip {
-            background: rgba(102, 126, 234, 0.1);
-            border-left: 3px solid #667eea;
-            padding: 0.8rem 1rem;
-            margin: 1rem 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-            color: #aaa;
+        .task-title {
+            color: #f5576c;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
         
-        /* Method List */
-        .method-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.8rem;
-            margin: 1rem 0;
+        /* Inline Code */
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #e83e8c;
+            font-size: 0.95em;
         }
         
-        .method-item {
-            background: #252525;
-            padding: 1rem;
-            border-radius: 12px;
+        /* Step by Step */
+        .steps {
+            margin: 30px 0;
+        }
+        
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .step-icon {
+            font-size: 2em;
+        }
+        
+        .step-content h4 {
+            color: #2a5298;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            margin: 0;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
             text-align: center;
-            border: 1px solid #333;
+            padding: 40px;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1em;
         }
         
-        .method-name {
-            color: #667eea;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 0.3rem;
-        }
-        
-        .method-desc {
-            font-size: 0.8rem;
-            color: #888;
-        }
-        
-        /* Run Button */
-        .run-btn {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 12px;
-            margin-top: 1rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .run-btn:active {
-            transform: scale(0.98);
-        }
-        
-        /* Copy Button */
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: #333;
-            border: none;
-            color: #aaa;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            cursor: pointer;
-        }
-        
-        .code-wrapper {
-            position: relative;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .content-section { padding: 25px; }
+            h2 { font-size: 1.5em; }
+            pre { font-size: 0.9em; padding: 15px; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <h1>📚 Lug'at Elementlari</h1>
-        <p>Python dasturlash asoslari</p>
-    </div>
-    
-    <!-- Navigation -->
-    <div class="nav-tabs">
-        <button class="nav-tab active" onclick="showTab('intro')">Kirish</button>
-        <button class="nav-tab" onclick="showTab('items')">.items()</button>
-        <button class="nav-tab" onclick="showTab('keys')">.keys()</button>
-        <button class="nav-tab" onclick="showTab('values')">.values()</button>
-        <button class="nav-tab" onclick="showTab('sorted')">sorted()</button>
-        <button class="nav-tab" onclick="showTab('tasks')">Topshiriqlar</button>
-    </div>
-    
-    <!-- Intro Section -->
-    <div id="intro" class="content active">
-        <div class="card">
-            <div class="card-title">🎯 Dars Maqsadi</div>
-            <p class="card-text">
-                Lug'at ichidagi barcha kalit va qiymatlarni turli usullar yordamida chiqarishni o'rganamiz.
-            </p>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📚 Python Lug'atlari</h1>
+            <p>To'liq o'rganish qo'llanmasi - Barcha metodlar batafsil tushuntirilgan</p>
         </div>
         
-        <div class="method-list">
-            <div class="method-item">
-                <div class="method-name">.items()</div>
-                <div class="method-desc">Kalit-qiymat juftligi</div>
-            </div>
-            <div class="method-item">
-                <div class="method-name">.keys()</div>
-                <div class="method-desc">Faqat kalitlar</div>
-            </div>
-            <div class="method-item">
-                <div class="method-name">.values()</div>
-                <div class="method-desc">Faqat qiymatlar</div>
-            </div>
-            <div class="method-item">
-                <div class="method-name">sorted()</div>
-                <div class="method-desc">Tartib bilan</div>
+        <!-- Navigation -->
+        <div class="nav-menu">
+            <button class="nav-btn active" onclick="showSection(0)">Kirish</button>
+            <button class="nav-btn" onclick="showSection(1)">.items()</button>
+            <button class="nav-btn" onclick="showSection(2)">.keys()</button>
+            <button class="nav-btn" onclick="showSection(3)">.values()</button>
+            <button class="nav-btn" onclick="showSection(4)">sorted()</button>
+            <button class="nav-btn" onclick="showSection(5)">set()</button>
+            <button class="nav-btn" onclick="showSection(6)">Topshiriqlar</button>
+        </div>
+        
+        <!-- SECTION 1: INTRO -->
+        <div class="content-section active">
+            <h2>🎯 Lug'at Elementlari Bilan Ishlash</h2>
+            
+            <p>Avvalgi darslarda biz lug'at yaratish va unga kalit bo'yicha murojat qilishni o'rgandik. Ammo real dasturlarda lug'atlar juda katta bo'lishi mumkin va biz barcha kalitlarni yoki qiymatlarni oldindan bilmasligimiz mumkin.</p>
+            
+            <p>Ushbu qo'llanmada biz quyidagi metodlarni o'rganamiz:</p>
+            
+            <ul class="feature-list">
+                <li>
+                    <span class="list-number">1</span>
+                    <div class="list-content">
+                        <div class="list-title">.items() Metodi</div>
+                        <div class="list-desc">Barcha kalit-qiymat juftliklarini olish uchun</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="list-number">2</span>
+                    <div class="list-content">
+                        <div class="list-title">.keys() Metodi</div>
+                        <div class="list-desc">Faqat kalitlarni olish uchun</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="list-number">3</span>
+                    <div class="list-content">
+                        <div class="list-title">.values() Metodi</div>
+                        <div class="list-desc">Faqat qiymatlarni olish uchun</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="list-number">4</span>
+                    <div class="list-content">
+                        <div class="list-title">sorted() Funktsiyasi</div>
+                        <div class="list-desc">Alifbo bo'yicha tartiblash uchun</div>
+                    </div>
+                </li>
+                <li>
+                    <span class="list-number">5</span>
+                    <div class="list-content">
+                        <div class="list-title">set() Funktsiyasi</div>
+                        <div class="list-desc">Takrorlanishlarni olib tashlash uchun</div>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="info-box">
+                <div class="info-title">💡 Nega bu metodlar kerak?</div>
+                <p>Misol uchun, 1000 ta talaba ma'lumotlari saqlanayotgan lug'atda:</p>
+                <p>• Faqat ismlarni ko'rish uchun <code>.keys()</code></p>
+                <p>• Faqat baholarni ko'rish uchun <code>.values()</code></p>
+                <p>• Ism va baholarni birga ko'rish uchun <code>.items()</code></p>
+                <p>• Alifbo bo'yicha saralash uchun <code>sorted()</code></p>
             </div>
         </div>
         
-        <div class="card">
-            <div class="card-title">💡 Eslatma</div>
-            <p class="card-text">
-                Lug'atlar katta yoki kichik bo'lishi mumkin. Ba'zida barcha kalitlarni yoki qiymatlarni oldindan bilmasligimiz mumkin.
-            </p>
-        </div>
-    </div>
-    
-    <!-- .items() Section -->
-    <div id="items" class="content">
-        <div class="card">
-            <div class="card-title">📋 .items() Metodi</div>
-            <p class="card-text">
-                Barcha kalit-qiymat juftliklarini ko'rish uchun ishlatiladi.
-            </p>
+        <!-- SECTION 2: .ITEMS() -->
+        <div class="content-section">
+            <h2>📦 .items() Metodi</h2>
+            
+            <p>Bu metod lug'atdagi <strong>barcha kalit-qiymat juftliklarini</strong> tuple (o'zgarmas ro'yxat) ko'rinishida qaytaradi.</p>
+            
+            <h3>Oddiy Misol</h3>
             
             <div class="code-block">
                 <div class="code-header">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+                    <span class="code-title">Python Kod</span>
                 </div>
-                <pre>talaba = {
-    <span class="string">'ism'</span>: <span class="string">'Ali'</span>,
+                <pre><span class="comment"># Talaba ma'lumotlari lug'ati</span>
+<span class="variable">talaba</span> = {
+    <span class="string">'ism'</span>: <span class="string">'Alijon'</span>,
+    <span class="string">'familiya'</span>: <span class="string">'Shamshiyev'</span>,
     <span class="string">'yosh'</span>: <span class="number">22</span>,
-    <span class="string">'kurs'</span>: <span class="number">4</span>
+    <span class="string">'fakultet'</span>: <span class="string">'matematika'</span>
 }
 
-<span class="keyword">for</span> kalit, qiymat <span class="keyword">in</span> talaba.<span class="function">items</span>():
-    <span class="function">print</span>(<span class="string">f"{kalit}: {qiymat}"</span>)</pre>
+<span class="comment"># .items() metodini chaqirish</span>
+<span class="function">print</span>(<span class="variable">talaba</span>.<span class="method">items</span>())</pre>
             </div>
             
-            <div class="output">
-                <div class="output-label">Natija</div>
-                ism: Ali<br>
-                yosh: 22<br>
-                kurs: 4
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">dict_items([('ism', 'Alijon'), ('familiya', 'Shamshiyev'), ('yosh', 22), ('fakultet', 'matematika')])</div>
+            </div>
+            
+            <div class="tip-box">
+                <div class="tip-title">🧐 Tushuntirish</div>
+                <p>Natijada har bir juftlik <code>(kalit, qiymat)</code> ko'rinishida tuple ichida saqlangan. Bu o'zgaruvchi strukturani ifodalaydi.</p>
+            </div>
+            
+            <h3>For Tsikli Bilan Ishlash</h3>
+            
+            <p>Oddiy <code>print()</code> chaqirib natija tushunarsiz chiqadi. For tsikli yordamida har bir juftlikni chiroyli ko'rinishda chiqarish mumkin:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="comment"># Ikkita o'zgaruvchi ishlatamiz: kalit va qiymat</span>
+<span class="keyword">for</span> <span class="variable">kalit</span>, <span class="variable">qiymat</span> <span class="keyword">in</span> <span class="variable">talaba</span>.<span class="method">items</span>():
+    <span class="function">print</span>(<span class="string">f"Kalit: {kalit}"</span>)
+    <span class="function">print</span>(<span class="string">f"Qiymat: {qiymat}\n"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Kalit: ism
+Qiymat: Alijon
+
+Kalit: familiya
+Qiymat: Shamshiyev
+
+Kalit: yosh
+Qiymat: 22
+
+Kalit: fakultet
+Qiymat: matematika</div>
+            </div>
+            
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Diqqat!</div>
+                <p>For tsiklida ikkita o'zgaruvchi ishlatish <strong>majburiy</strong>. Agar bitta o'zgaruvchi ishlatsangiz, har bir tuple butunligicha shu o'zgaruvchiga yuklanadi.</p>
+            </div>
+            
+            <h3>Amaliy Misol: Telefonlar</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="variable">telefonlar</span> = {
+    <span class="string">'ali'</span>: <span class="string">'iPhone X'</span>,
+    <span class="string">'vali'</span>: <span class="string">'Galaxy S9'</span>,
+    <span class="string">'olim'</span>: <span class="string">'Mi 10 Pro'</span>,
+    <span class="string">'orif'</span>: <span class="string">'Nokia 3310'</span>
+}
+
+<span class="keyword">for</span> <span class="variable">ism</span>, <span class="variable">telefon</span> <span class="keyword">in</span> <span class="variable">telefonlar</span>.<span class="method">items</span>():
+    <span class="function">print</span>(<span class="string">f"{ism.title()}ning telefoni {telefon}"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Alining telefoni iPhone X
+Valining telefoni Galaxy S9
+Olimning telefoni Mi 10 Pro
+Orifning telefoni Nokia 3310</div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-title">💡 Foydali Metod</div>
+                <p><code>.title()</code> — string metodi bo'lib, so'zning birinchi harfini katta qiladi. Bu foydalanuvchi ismini chiroyli ko'rsatish uchun ishlatildi.</p>
             </div>
         </div>
         
-        <div class="card">
-            <div class="card-title">📱 Telefonlar Misoli</div>
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
-                </div>
-                <pre>telefonlar = {
-    <span class="string">'ali'</span>: <span class="string">'iPhone'</span>,
-    <span class="string">'vali'</span>: <span class="string">'Samsung'</span>
-}
-
-<span class="keyword">for</span> ism, tel <span class="keyword">in</span> telefonlar.<span class="function">items</span>():
-    <span class="function">print</span>(<span class="string">f"{ism.title()}ning telefoni {tel}"</span>)</pre>
-            </div>
+        <!-- SECTION 3: .KEYS() -->
+        <div class="content-section">
+            <h2>🔑 .keys() Metodi</h2>
             
-            <div class="output">
-                <div class="output-label">Natija</div>
-                Alining telefoni iPhone<br>
-                Valining telefoni Samsung
-            </div>
-        </div>
-    </div>
-    
-    <!-- .keys() Section -->
-    <div id="keys" class="content">
-        <div class="card">
-            <div class="card-title">🔑 .keys() Metodi</div>
-            <p class="card-text">
-                Faqat kalit so'zlarni olish uchun ishlatiladi.
-            </p>
+            <p>Bu metod lug'atdagi <strong>faqat kalitlarni</strong> qaytaradi. Agar sizga qiymatlar emas, faqat kalitlar ro'yxati kerak bo'lsa, bu metoddan foydalanasiz.</p>
+            
+            <h3>Asosiy Qo'llanish</h3>
             
             <div class="code-block">
                 <div class="code-header">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+                    <span class="code-title">Python Kod</span>
                 </div>
-                <pre>mahsulotlar = {
+                <pre><span class="comment"># Do'kon mahsulotlari</span>
+<span class="variable">mahsulotlar</span> = {
     <span class="string">'olma'</span>: <span class="number">10000</span>,
     <span class="string">'anor'</span>: <span class="number">20000</span>,
-    <span class="string">'uzum'</span>: <span class="number">40000</span>
+    <span class="string">'uzum'</span>: <span class="number">40000</span>,
+    <span class="string">'anjir'</span>: <span class="number">25000</span>,
+    <span class="string">'shaftoli'</span>: <span class="number">30000</span>
 }
 
-<span class="function">print</span>(mahsulotlar.<span class="function">keys</span>())
-
-<span class="keyword">for</span> m <span class="keyword">in</span> mahsulotlar.<span class="function">keys</span>():
-    <span class="function">print</span>(m.<span class="function">title</span>())</pre>
+<span class="comment"># Faqat kalitlarni olish</span>
+<span class="function">print</span>(<span class="variable">mahsulotlar</span>.<span class="method">keys</span>())</pre>
             </div>
             
-            <div class="output">
-                <div class="output-label">Natija</div>
-                dict_keys(['olma', 'anor', 'uzum'])<br>
-                Olma<br>
-                Anor<br>
-                Uzum
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">dict_keys(['olma', 'anor', 'uzum', 'anjir', 'shaftoli'])</div>
             </div>
-        </div>
-        
-        <div class="tip">
-            💡 For tsiklida .keys() yozmasangiz ham natija bir xil!
-        </div>
-        
-        <div class="card">
-            <div class="card-title">🛒 Bozorlik Misoli</div>
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
-                </div>
-                <pre>bozorlik = [<span class="string">'anor'</span>, <span class="string">'non'</span>]
-
-<span class="keyword">for</span> m <span class="keyword">in</span> mahsulotlar:
-    <span class="keyword">if</span> m <span class="keyword">in</span> bozorlik:
-        <span class="function">print</span>(<span class="string">f"{m}: {mahsulotlar[m]} so'm"</span>)</pre>
-            </div>
-        </div>
-    </div>
-    
-    <!-- .values() Section -->
-    <div id="values" class="content">
-        <div class="card">
-            <div class="card-title">💎 .values() Metodi</div>
-            <p class="card-text">
-                Faqat qiymatlarni olish uchun ishlatiladi.
-            </p>
+            
+            <h3>For Tsikli Bilan</h3>
             
             <div class="code-block">
                 <div class="code-header">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+                    <span class="code-title">Python Kod</span>
                 </div>
-                <pre>telefonlar = {
-    <span class="string">'ali'</span>: <span class="string">'iPhone'</span>,
-    <span class="string">'vali'</span>: <span class="string">'Samsung'</span>,
-    <span class="string">'olim'</span>: <span class="string">'iPhone'</span>
-}
-
-<span class="keyword">for</span> tel <span class="keyword">in</span> telefonlar.<span class="function">values</span>():
-    <span class="function">print</span>(tel)</pre>
+                <pre><span class="function">print</span>(<span class="string">"Do'kondagi mahsulotlar:"</span>)
+<span class="keyword">for</span> <span class="variable">mahsulot</span> <span class="keyword">in</span> <span class="variable">mahsulotlar</span>.<span class="method">keys</span>():
+    <span class="function">print</span>(<span class="string">f"- {mahsulot.title()}"</span>)</pre>
             </div>
             
-            <div class="output">
-                <div class="output-label">Natija</div>
-                iPhone<br>
-                Samsung<br>
-                iPhone
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Do'kondagi mahsulotlar:
+- Olma
+- Anor
+- Uzum
+- Anjir
+- Shaftoli</div>
             </div>
-        </div>
-        
-        <div class="card">
-            <div class="card-title">🔄 set() - Takrorlanmas</div>
-            <p class="card-text">
-                Bir xil qiymatlar faqat bir marta chiqishi uchun:
-            </p>
+            
+            <div class="tip-box">
+                <div class="tip-title">💡 Muhim Kashfiyot</div>
+                <p>Aslida <code>for mahsulot in mahsulotlar:</code> deb yozsangiz ham xuddi shu natija chiqadi! Python avtomatik ravishda faqat kalitlar bo'yicha tsikl qiladi. Bu <code>.keys()</code> metodini ixtiyoriy qiladi, lekin kod o'qilishini yaxshilaydi.</p>
+            </div>
+            
+            <h3>Amaliy Misol: Bozorlik Ro'yxati</h3>
+            
+            <p>Do'kondagi mahsulotlarni bozorlik ro'yxati bilan solishtirish:</p>
             
             <div class="code-block">
                 <div class="code-header">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+                    <span class="code-title">Python Kod</span>
                 </div>
-                <pre><span class="keyword">for</span> tel <span class="keyword">in</span> <span class="function">set</span>(telefonlar.<span class="function">values</span>()):
-    <span class="function">print</span>(tel)</pre>
-            </div>
-            
-            <div class="output">
-                <div class="output-label">Natija</div>
-                iPhone<br>
-                Samsung
-            </div>
-        </div>
-    </div>
-    
-    <!-- sorted() Section -->
-    <div id="sorted" class="content">
-        <div class="card">
-            <div class="card-title">🔄 sorted() Funktsiyasi</div>
-            <p class="card-text">
-                Lug'at elementlarini alifbo bo'yicha tartiblab chiqarish.
-            </p>
-            
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
-                </div>
-                <pre>mahsulotlar = {
+                <pre><span class="comment"># Narxlar lug'ati</span>
+<span class="variable">narxlar</span> = {
     <span class="string">'olma'</span>: <span class="number">10000</span>,
     <span class="string">'anor'</span>: <span class="number">20000</span>,
-    <span class="string">'uzum'</span>: <span class="number">40000</span>
+    <span class="string">'uzum'</span>: <span class="number">40000</span>,
+    <span class="string">'non'</span>: <span class="number">3000</span>
 }
 
-<span class="comment"># Alifbo bo'yicha kalitlar</span>
-<span class="keyword">for</span> m <span class="keyword">in</span> <span class="function">sorted</span>(mahsulotlar):
-    <span class="function">print</span>(m)</pre>
+<span class="comment"># Bozorlik ro'yxati</span>
+<span class="variable">bozorlik</span> = [<span class="string">'anor'</span>, <span class="string">'uzum'</span>, <span class="string">'non'</span>, <span class="string">'baliq'</span>]
+
+<span class="function">print</span>(<span class="string">"Sotib olinadigan mahsulotlar:"</span>)
+<span class="keyword">for</span> <span class="variable">mahsulot</span> <span class="keyword">in</span> <span class="variable">narxlar</span>:
+    <span class="keyword">if</span> <span class="variable">mahsulot</span> <span class="keyword">in</span> <span class="variable">bozorlik</span>:
+        <span class="function">print</span>(<span class="string">f"{mahsulot.title()}: {narxlar[mahsulot]} so'm"</span>)</pre>
             </div>
             
-            <div class="output">
-                <div class="output-label">Natija</div>
-                anor<br>
-                olma<br>
-                uzum
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Sotib olinadigan mahsulotlar:
+Anor: 20000 so'm
+Uzum: 40000 so'm
+Non: 3000 so'm</div>
             </div>
-        </div>
-        
-        <div class="tip">
-            💡 sorted(lugat) - kalitlarni tartiblaydi<br>
-            💡 sorted(lugat.values()) - qiymatlarni tartiblaydi
-        </div>
-    </div>
-    
-    <!-- Tasks Section -->
-    <div id="tasks" class="content">
-        <div class="card">
-            <span class="task-badge">TOPSHIRIQ 1</span>
-            <div class="card-title">Python Lug'ati</div>
-            <p class="card-text" style="margin-bottom: 1rem;">
-                10 ta so'zdan iborat izohli lug'at yarating va alifbo bo'yicha chiqaring.
-            </p>
+            
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Diqqat</div>
+                <p>'Baliq' bozorlik ro'yxatida bor, lekin narxlar lug'atida yo'q, shuning uchun chiqarilmadi. Bu xatolik emas, shunchaki shart bajarilmadi.</p>
+            </div>
+            
+            <h3>Teskari Tekshirish: Yo'q Mahsulotlarni Topish</h3>
             
             <div class="code-block">
                 <div class="code-header">
                     <div class="dot dot-red"></div>
                     <div class="dot dot-yellow"></div>
                     <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+                    <span class="code-title">Python Kod</span>
                 </div>
-                <pre>python_lugat = {
-    <span class="string">'boolean'</span>: <span class="string">'Mantiqiy qiymat'</span>,
-    <span class="string">'float'</span>: <span class="string">'O\'nlik son'</span>,
-    <span class="string">'for'</span>: <span class="string">'Takrorlash'</span>,
-    <span class="string">'if'</span>: <span class="string">'Shart'</span>,
+                <pre><span class="function">print</span>(<span class="string">"\nDo'konda yo'q mahsulotlar:"</span>)
+<span class="keyword">for</span> <span class="variable">buyum</span> <span class="keyword">in</span> <span class="variable">bozorlik</span>:
+    <span class="keyword">if</span> <span class="variable">buyum</span> <span class="keyword">not in</span> <span class="variable">narxlar</span>:
+        <span class="function">print</span>(<span class="string">f"- {buyum} (do'konda yo'q)"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Do'konda yo'q mahsulotlar:
+- baliq (do'konda yo'q)</div>
+            </div>
+        </div>
+        
+        <!-- SECTION 4: .VALUES() -->
+        <div class="content-section">
+            <h2>💎 .values() Metodi</h2>
+            
+            <p>Bu metod lug'atdagi <strong>faqat qiymatlarni</strong> qaytaradi. Agar kalitlar emas, faqat ma'lumotlar qiymati kerak bo'lsa ishlatiladi.</p>
+            
+            <h3>Asosiy Qo'llanish</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="variable">telefonlar</span> = {
+    <span class="string">'ali'</span>: <span class="string">'iPhone X'</span>,
+    <span class="string">'vali'</span>: <span class="string">'Galaxy S9'</span>,
+    <span class="string">'olim'</span>: <span class="string">'Mi 10 Pro'</span>,
+    <span class="string">'orif'</span>: <span class="string">'Nokia 3310'</span>
+}
+
+<span class="function">print</span>(<span class="variable">telefonlar</span>.<span class="method">values</span>())</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">dict_values(['iPhone X', 'Galaxy S9', 'Mi 10 Pro', 'Nokia 3310'])</div>
+            </div>
+            
+            <h3>Amaliy Misol</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="function">print</span>(<span class="string">"Foydalanuvchilar quyidagi telefonlarni ishlatishadi:\n"</span>)
+
+<span class="keyword">for</span> <span class="variable">tel</span> <span class="keyword">in</span> <span class="variable">telefonlar</span>.<span class="method">values</span>():
+    <span class="function">print</span>(<span class="string">f"📱 {tel}"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Foydalanuvchilar quyidagi telefonlarni ishlatishadi:
+
+📱 iPhone X
+📱 Galaxy S9
+📱 Mi 10 Pro
+📱 Nokia 3310</div>
+            </div>
+            
+            <div class="warning-box">
+                <div class="warning-title">⚠️ Muammo!</div>
+                <p>Agar bir xil qiymatlar ko'p marta takrorlansa, ular ham ko'p marta chiqadi:</p>
+            </div>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="variable">telefonlar</span> = {
+    <span class="string">'ali'</span>: <span class="string">'iPhone X'</span>,
+    <span class="string">'vali'</span>: <span class="string">'Galaxy S9'</span>,
+    <span class="string">'hamida'</span>: <span class="string">'Galaxy S9'</span>,
+    <span class="string">'tohir'</span>: <span class="string">'iPhone X'</span>,
+    <span class="string">'maryam'</span>: <span class="string">'iPhone X'</span>
+}
+
+<span class="keyword">for</span> <span class="variable">tel</span> <span class="keyword">in</span> <span class="variable">telefonlar</span>.<span class="method">values</span>():
+    <span class="function">print</span>(<span class="variable">tel</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija (Takrorlanish bilan)</div>
+                <div class="output-content">iPhone X
+Galaxy S9
+Galaxy S9
+iPhone X
+iPhone X</div>
+            </div>
+            
+            <h3>set() Yechimi</h3>
+            
+            <p>Takrorlanishlarni olib tashlash uchun <code>set()</code> funksiyasidan foydalanamiz:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="function">print</span>(<span class="string">"Bir xil telefonlarni hisobga olmaganda:\n"</span>)
+
+<span class="keyword">for</span> <span class="variable">tel</span> <span class="keyword">in</span> <span class="function">set</span>(<span class="variable">telefonlar</span>.<span class="method">values</span>()):
+    <span class="function">print</span>(<span class="string">f"✅ {tel}"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija (Takrorlanmas)</div>
+                <div class="output-content">Bir xil telefonlarni hisobga olmaganda:
+
+✅ Galaxy S9
+✅ iPhone X</div>
+            </div>
+        </div>
+        
+        <!-- SECTION 5: SORTED() -->
+        <div class="content-section">
+            <h2>🔄 sorted() Funktsiyasi</h2>
+            
+            <p>Python lug'atlarni kiritilgan tartibda saqlaydi, lekin ko'pincha ma'lumotlarni <strong>alifbo bo'yicha</strong> tartiblash talab qilinadi. Buning uchun <code>sorted()</code> funksiyasidan foydalanamiz.</p>
+            
+            <h3>sorted() Nima Qiladi?</h3>
+            
+            <p>Bu funksiya har qanday ketma-ketlikni (lug'at, ro'yxat, tuple) olib, elementlarni alifbo yoki o'sish tartibida saralab, <strong>yangi ro'yxat</strong> qaytaradi.</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metod</th>
+                        <th>Natija</th>
+                        <th>Tushuntirish</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sorted(lugat)</code></td>
+                        <td>Kalitlar ro'yxati</td>
+                        <td>Faqat kalitlarni tartiblaydi</td>
+                    </tr>
+                    <tr>
+                        <td><code>sorted(lugat.keys())</code></td>
+                        <td>Kalitlar ro'yxati</td>
+                        <td>Aniqroq yozilishi</td>
+                    </tr>
+                    <tr>
+                        <td><code>sorted(lugat.values())</code></td>
+                        <td>Qiymatlar ro'yxati</td>
+                        <td>Qiymatlarni tartiblaydi</td>
+                    </tr>
+                    <tr>
+                        <td><code>sorted(lugat.items())</code></td>
+                        <td>Juftliklar ro'yxati</td>
+                        <td>Kalit bo'yicha tartiblaydi</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Kalitlarni Tartiblash</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="variable">mahsulotlar</span> = {
+    <span class="string">'olma'</span>: <span class="number">10000</span>,
+    <span class="string">'anor'</span>: <span class="number">20000</span>,
+    <span class="string">'uzum'</span>: <span class="number">40000</span>,
+    <span class="string">'anjir'</span>: <span class="number">25000</span>
+}
+
+<span class="function">print</span>(<span class="string">"Alifbo bo'yicha mahsulotlar:\n"</span>)
+
+<span class="keyword">for</span> <span class="variable">m</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">mahsulotlar</span>):
+    <span class="function">print</span>(<span class="string">f"• {m.title()}"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Alifbo bo'yicha mahsulotlar:
+
+• Anjir
+• Anor
+• Olma
+• Uzum</div>
+            </div>
+            
+            <h3>Qiymatlarni Tartiblash</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="function">print</span>(<span class="string">"Narx bo'yicha (arzondan qimmatga):\n"</span>)
+
+<span class="keyword">for</span> <span class="variable">narx</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">mahsulotlar</span>.<span class="method">values</span>()):
+    <span class="function">print</span>(<span class="string">f"{narx} so'm"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">Narx bo'yicha (arzondan qimmatga):
+
+10000 so'm
+20000 so'm
+25000 so'm
+40000 so'm</div>
+            </div>
+            
+            <h3>Teskari Tartib (Z-A)</h3>
+            
+            <p>Teskari tartibda (kamayish tartibida) chiqarish uchun <code>reverse=True</code> parametridan foydalanamiz:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="keyword">for</span> <span class="variable">m</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">mahsulotlar</span>, <span class="variable">reverse</span>=<span class="keyword">True</span>):
+    <span class="function">print</span>(<span class="variable">m</span>.<span class="method">title</span>())</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija (Z-A)</div>
+                <div class="output-content">Uzum
+Olma
+Anor
+Anjir</div>
+            </div>
+        </div>
+        
+        <!-- SECTION 6: SET() -->
+        <div class="content-section">
+            <h2>🎯 set() Batafsil</h2>
+            
+            <p><code>set()</code> — bu faqat <strong>takrorlanmas elementlar</strong> saqlaydigan ma'lumot turi. Matematikadagi "to'plam" (set) tushunchasiga o'xshaydi.</p>
+            
+            <div class="info-box">
+                <div class="info-title">📋 Set Xususiyatlari</div>
+                <ul class="feature-list">
+                    <li style="border: none;">
+                        <span class="list-number">✓</span>
+                        <div class="list-content">
+                            <div class="list-title">Takrorlanmas Elementlar</div>
+                            <div class="list-desc">Set ichida bir xil element faqat bir marta saqlanadi</div>
+                        </div>
+                    </li>
+                    <li style="border: none;">
+                        <span class="list-number">✓</span>
+                        <div class="list-content">
+                            <div class="list-title">Tartibsiz</div>
+                            <div class="list-desc">Elementlar indeksga ega emas, tartibsiz saqlanadi</div>
+                        </div>
+                    </li>
+                    <li style="border: none;">
+                        <span class="list-number">✓</span>
+                        <div class="list-content">
+                            <div class="list-title">Tez Qidirish</div>
+                            <div class="list-desc">Hash jadvali tufayli qidirish tez amalga oshiriladi</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3>Set Yaratish</h3>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="comment"># Bo'sh set yaratish</span>
+<span class="variable">bosh_set</span> = <span class="function">set</span>()
+
+<span class="comment"># Elementlar bilan set yaratish</span>
+<span class="variable">meva_set</span> = {<span class="string">'olma'</span>, <span class="string">'anor'</span>, <span class="string">'olma'</span>}  <span class="comment"># Olma 2 marta!</span>
+
+<span class="function">print</span>(<span class="variable">meva_set</span>)  <span class="comment"># {'olma', 'anor'} - takrorlanish olib tashlandi</span></pre>
+            </div>
+            
+            <h3>Ro'yxatni Setga Aylantirish</h3>
+            
+            <p>Bu eng keng tarqalgan usul. Takrorlanishlarni tezda olib tashlash uchun:</p>
+            
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="code-title">Python Kod</span>
+                </div>
+                <pre><span class="variable">telefonlar</span> = [<span class="string">'iPhone'</span>, <span class="string">'Samsung'</span>, <span class="string">'iPhone'</span>, <span class="string">'Nokia'</span>, <span class="string">'Samsung'</span>]
+
+<span class="comment"># Setga aylantirish</span>
+<span class="variable">unique_telefonlar</span> = <span class="function">set</span>(<span class="variable">telefonlar</span>)
+
+<span class="function">print</span>(<span class="variable">unique_telefonlar</span>)
+<span class="function">print</span>(<span class="string">f"Jami: {len(telefonlar)} ta, Unique: {len(unique_telefonlar)} ta"</span>)</pre>
+            </div>
+            
+            <div class="output-block">
+                <div class="output-title">Natija</div>
+                <div class="output-content">{'Samsung', 'iPhone', 'Nokia'}
+Jami: 5 ta, Unique: 3 ta</div>
+            </div>
+            
+            <div class="tip-box">
+                <div class="tip-title">💡 Amaliy Maslahat</div>
+                <p>Lug'at qiymatlarida takrorlanishlar ko'p bo'lsa (masalan, 1000 ta foydalanuvchidan faqat 10 xil telefon modeli), avval <code>set()</code> bilan unique modellarni ajratib oling, keyin ularni sanang yoki tahlil qiling.</p>
+            </div>
+        </div>
+        
+        <!-- SECTION 7: TASKS -->
+        <div class="content-section">
+            <h2>📝 Amaliy Topshiriqlar</h2>
+            
+            <!-- Task 1 -->
+            <div class="task-box">
+                <span class="task-badge">Topshiriq 1</span>
+                <div class="task-title">Python Izohli Lug'ati</div>
+                <p>Python izohli lug'atini yarating va lug'atga kamida 10 ta so'z qo'shing. Lug'atdagi har bir kalit va qiymatni for tsikli yordamida, alifbo ketma-ketligida chiroyli qilib konsolga chiqaring.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="code-title">Yechim</span>
+                    </div>
+                    <pre><span class="comment"># Python atamalar lug'ati</span>
+<span class="variable">python_lugat</span> = {
+    <span class="string">'boolean'</span>: <span class="string">'Mantiqiy qiymat (True yoki False)'</span>,
+    <span class="string">'float'</span>: <span class="string">'O\'nlik kasr son'</span>,
+    <span class="string">'for'</span>: <span class="string">'Takrorlash (tsikl) operatori'</span>,
+    <span class="string">'if'</span>: <span class="string">'Shart operatori'</span>,
     <span class="string">'integer'</span>: <span class="string">'Butun son'</span>,
-    <span class="string">'list'</span>: <span class="string">'Ro\'yxat'</span>,
-    <span class="string">'loop'</span>: <span class="string">'Tsikl'</span>,
-    <span class="string">'string'</span>: <span class="string">'Matn'</span>,
-    <span class="string">'tuple'</span>: <span class="string">'O\'zgarmas'</span>,
+    <span class="string">'list'</span>: <span class="string">'O\'zgaruvchan ro\'yxat'</span>,
+    <span class="string">'loop'</span>: <span class="string">'Takrorlash tsikli'</span>,
+    <span class="string">'string'</span>: <span class="string">'Matn (tekst) ma\'lumot turi'</span>,
+    <span class="string">'tuple'</span>: <span class="string">'O\'zgarmas ro\'yxat'</span>,
     <span class="string">'variable'</span>: <span class="string">'O\'zgaruvchi'</span>
 }
 
-<span class="keyword">for</span> k, q <span class="keyword">in</span> <span class="function">sorted</span>(python_lugat.<span class="function">items</span>()):
-    <span class="function">print</span>(<span class="string">f"{k.title()}: {q}"</span>)</pre>
-            </div>
-        </div>
-        
-        <div class="card">
-            <span class="task-badge">TOPSHIRIQ 2</span>
-            <div class="card-title">Davlatlar va Poytaxtlar</div>
-            
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+<span class="function">print</span>(<span class="string">"📚 PYTHON LUG'ATI\n"</span>)
+<span class="function">print</span>(<span class="string">"=" * 40</span>)
+
+<span class="comment"># Alifbo bo'yicha tartiblab chiqarish</span>
+<span class="keyword">for</span> <span class="variable">atama</span>, <span class="variable">izoh</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">python_lugat</span>.<span class="method">items</span>()):
+    <span class="function">print</span>(<span class="string">f"\n🔹 {atama.upper()}"</span>)
+    <span class="function">print</span>(<span class="string">f"   {izoh}"</span>)</pre>
                 </div>
-                <pre>davlatlar = {
+            </div>
+            
+            <!-- Task 2 -->
+            <div class="task-box">
+                <span class="task-badge">Topshiriq 2</span>
+                <div class="task-title">Davlatlar va Poytaxtlar</div>
+                <p>Davlatlar va ularning poytaxtlari lug'atini tuzing. Avval lug'atdagi davlatlarni, keyin poytaxtlarni alohida-alohida, alifbo ketma-ketligida konsolga chiqaring.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="code-title">Yechim</span>
+                    </div>
+                    <pre><span class="variable">davlatlar</span> = {
+    <span class="string">'aqsh'</span>: <span class="string">'vashington'</span>,
+    <span class="string">'germaniya'</span>: <span class="string">'berlin'</span>,
+    <span class="string">'rossiya'</span>: <span class="string">'moskva'</span>,
+    <span class="string">'uzbekistan'</span>: <span class="string">'toshkent'</span>,
+    <span class="string">'xitoy'</span>: <span class="string">'pekin'</span>
+}
+
+<span class="function">print</span>(<span class="string">"🌍 DAVLATLAR:\n"</span>)
+<span class="keyword">for</span> <span class="variable">d</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">davlatlar</span>.<span class="method">keys</span>()):
+    <span class="function">print</span>(<span class="string">f"• {d.upper()}"</span>)
+
+<span class="function">print</span>(<span class="string">"\n🏛️ POYTAXTLAR:\n"</span>)
+<span class="keyword">for</span> <span class="variable">p</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">davlatlar</span>.<span class="method">values</span>()):
+    <span class="function">print</span>(<span class="string">f"• {p.title()}"</span>)</pre>
+                </div>
+            </div>
+            
+            <!-- Task 3 -->
+            <div class="task-box">
+                <span class="task-badge">Topshiriq 3</span>
+                <div class="task-title">Davlatni Qidirish</div>
+                <p>Foydalanuvchidan istalgan davlatni kiritishni so'rang va shu davlatning poytaxtini konsolga chiqaring. Agar foydalanuvchi lug'atda yo'q davlatni kiritsa, "Bizda bunday ma'lumot yo'q" degan xabarni chiqaring.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="code-title">Yechim</span>
+                    </div>
+                    <pre><span class="variable">davlatlar</span> = {
     <span class="string">'aqsh'</span>: <span class="string">'vashington'</span>,
     <span class="string">'germaniya'</span>: <span class="string">'berlin'</span>,
     <span class="string">'rossiya'</span>: <span class="string">'moskva'</span>,
     <span class="string">'uzbekistan'</span>: <span class="string">'toshkent'</span>
 }
 
-<span class="comment"># Davlatlar</span>
-<span class="keyword">for</span> d <span class="keyword">in</span> <span class="function">sorted</span>(davlatlar.<span class="function">keys</span>()):
-    <span class="function">print</span>(d.<span class="function">upper</span>())
+<span class="variable">davlat</span> = <span class="function">input</span>(<span class="string">"Davlat nomini kiriting: "</span>).<span class="method">lower</span>()
 
-<span class="comment"># Poytaxtlar</span>
-<span class="keyword">for</span> p <span class="keyword">in</span> <span class="function">sorted</span>(davlatlar.<span class="function">values</span>()):
-    <span class="function">print</span>(p.<span class="function">title</span>())</pre>
-            </div>
-        </div>
-        
-        <div class="card">
-            <span class="task-badge">TOPSHIRIQ 3</span>
-            <div class="card-title">Davlat Qidirish</div>
-            
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
-                </div>
-                <pre>davlat = <span class="function">input</span>(<span class="string">"Davlat: "</span>).<span class="function">lower</span>()
-
-<span class="keyword">if</span> davlat <span class="keyword">in</span> davlatlar:
-    <span class="function">print</span>(<span class="string">f"Poytaxt: {davlatlar[davlat].title()}"</span>)
+<span class="keyword">if</span> <span class="variable">davlat</span> <span class="keyword">in</span> <span class="variable">davlatlar</span>:
+    <span class="function">print</span>(<span class="string">f"\n✅ {davlat.upper()}ning poytaxti {davlatlar[davlat].title()}"</span>)
 <span class="keyword">else</span>:
-    <span class="function">print</span>(<span class="string">"Bizda bunday ma'lumot yo'q"</span>)</pre>
-            </div>
-        </div>
-        
-        <div class="card">
-            <span class="task-badge">TOPSHIRIQ 4</span>
-            <div class="card-title">Restoran Menyusi</div>
-            
-            <div class="code-block">
-                <div class="code-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="code-lang">PYTHON</span>
+    <span class="function">print</span>(<span class="string">"\n❌ Bizda bunday ma'lumot yo'q"</span>)</pre>
                 </div>
-                <pre>menu = {
+            </div>
+            
+            <!-- Task 4 -->
+            <div class="task-box">
+                <span class="task-badge">Topshiriq 4</span>
+                <div class="task-title">Restoran Menyusi</div>
+                <p>Restoran menusi lug'atini tuzing. Foydalanuvchidan 3 ta ovqat buyurtma berishni so'rang. Foydalanuvchi kiritgan taomlarni menu bilan solishtiring, agar taom menuda bo'lsa narhini ko'rsating, aks holda "bizda bunday taom yo'q" degan xabarni chiqaring.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="code-title">Yechim</span>
+                    </div>
+                    <pre><span class="variable">menu</span> = {
     <span class="string">'osh'</span>: <span class="number">25000</span>,
     <span class="string">'manti'</span>: <span class="number">8000</span>,
-    <span class="string">'somsa'</span>: <span class="number">6000</span>
+    <span class="string">'somsa'</span>: <span class="number">6000</span>,
+    <span class="string">'shashlik'</span>: <span class="number">15000</span>,
+    <span class="string">'lagmon'</span>: <span class="number">22000</span>
 }
 
-<span class="keyword">for</span> n <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):
-    taom = <span class="function">input</span>(<span class="string">f"{n+1}-taom: "</span>).<span class="function">lower</span>()
+<span class="function">print</span>(<span class="string">"🍽️ 3 ta taom buyurtma bering:\n"</span>)
+
+<span class="keyword">for</span> <span class="variable">n</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):
+    <span class="variable">taom</span> = <span class="function">input</span>(<span class="string">f"{n+1}-taom: "</span>).<span class="method">lower</span>()
     
-    <span class="keyword">if</span> taom <span class="keyword">in</span> menu:
-        <span class="function">print</span>(<span class="string">f"{taom.title()}: {menu[taom]} so'm"</span>)
+    <span class="keyword">if</span> <span class="variable">taom</span> <span class="keyword">in</span> <span class="variable">menu</span>:
+        <span class="function">print</span>(<span class="string">f"   ✅ {taom.title()}: {menu[taom]} so'm\n"</span>)
     <span class="keyword">else</span>:
-        <span class="function">print</span>(<span class="string">"Bunday taom yo'q"</span>)</pre>
+        <span class="function">print</span>(<span class="string">f"   ❌ Bizda {taom} yo'q\n"</span>)</pre>
+                </div>
             </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>🎓 Python Dasturlash Kursi | Lug'atlar Bo'yicha To'liq Qo'llanma</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Barcha huquqlar himoyalangan © 2024</p>
         </div>
     </div>
     
     <script>
-        function showTab(tabName) {
-            // Hide all contents
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('active');
+        function showSection(index) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
             });
             
-            // Remove active class from all tabs
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
             
-            // Show selected content
-            document.getElementById(tabName).classList.add('active');
+            // Show selected section
+            document.querySelectorAll('.content-section')[index].classList.add('active');
             
-            // Add active class to clicked tab
-            event.target.classList.add('active');
+            // Add active class to clicked button
+            document.querySelectorAll('.nav-btn')[index].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        // Copy code function
-        document.querySelectorAll('pre').forEach(block => {
-            block.addEventListener('dblclick', function() {
-                const text = this.innerText;
-                navigator.clipboard.writeText(text).then(() => {
-                    alert('Kod nusxalandi!');
-                });
-            });
-        });
     </script>
 </body>
 </html>
